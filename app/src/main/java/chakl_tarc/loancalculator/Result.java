@@ -4,9 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class Result extends AppCompatActivity
 {
+
+    private String status;
+    private double totalLoan = 0;
+    private double monthlyRepayment = 0;
+    private double interestRate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -18,10 +24,17 @@ public class Result extends AppCompatActivity
         //getIntent() method = asking "who called me?"
         Intent intent = getIntent();
 
-        String status = intent.getStringExtra(Main.LOANSTATUS);
+        status = intent.getStringExtra(Main.LOANSTATUS);
 
-        //For numerical data, a default value must be provided
-        //double repayment = intent.getDoubleExtra("repayment", 0);
+        if(status.equals("Approve"))
+        {
+
+
+            //For numerical data, a default value must be provided
+            totalLoan = intent.getDoubleExtra(Main.TOTALLOAN, 0);
+            monthlyRepayment = intent.getDoubleExtra(Main.MONTHLYPAYMENT, 0);
+            interestRate = intent.getDoubleExtra(Main.TOTALINTEREST, 0);
+        }
     }
 
     public void closeActivity(View view)
